@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.chani.wallpapersetter.R
+import ru.chani.wallpapersetter.domain.entity.Category
 import ru.chani.wallpapersetter.presentation.categories.CategoriesFragment
+import ru.chani.wallpapersetter.presentation.list.ListFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Navigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,9 +19,18 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun launchFragment(fragment: Fragment) {
-        supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
             .replace(R.id.container, fragment)
             .commit()
+    }
+
+    override fun goBack() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
+    override fun goToListFragment(category: Category) {
+        val listFragment = ListFragment.newInstance(category = category)
+        launchFragment(listFragment)
     }
 }
