@@ -1,10 +1,12 @@
 package ru.chani.wallpapersetter.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.chani.wallpapersetter.R
 import ru.chani.wallpapersetter.domain.entity.Category
+import ru.chani.wallpapersetter.domain.entity.Image
 import ru.chani.wallpapersetter.presentation.categories.CategoriesFragment
 import ru.chani.wallpapersetter.presentation.list.ListFragment
 
@@ -32,5 +34,9 @@ class MainActivity : AppCompatActivity(), Navigator {
     override fun goToListFragment(category: Category) {
         val listFragment = ListFragment.newInstance(category = category)
         launchFragment(listFragment)
+    }
+
+    override fun goToImageItemFragment(imageItem: Image) {
+        Log.d("GO_TO_IMAGE_ITEM_DEBUG", imageItem.largeImageURL)
     }
 }

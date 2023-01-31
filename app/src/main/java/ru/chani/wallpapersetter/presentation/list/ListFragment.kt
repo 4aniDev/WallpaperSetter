@@ -1,16 +1,17 @@
 package ru.chani.wallpapersetter.presentation.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ru.chani.wallpapersetter.databinding.FragmentListBinding
 import ru.chani.wallpapersetter.domain.entity.Category
 import ru.chani.wallpapersetter.presentation.AppViewModelFactory
-import ru.chani.wallpapersetter.presentation.categories.CategoryViewModel
+import ru.chani.wallpapersetter.presentation.navigator
 
 
 class ListFragment : Fragment() {
@@ -26,6 +27,8 @@ class ListFragment : Fragment() {
             AppViewModelFactory(requireContext(), category!!)
         )[ListViewModel::class.java]
     }
+
+    private val imageListRvAdapter = ImageListRvAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +48,32 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //For testing
-        viewModel.listOfImages.observe(viewLifecycleOwner) {
-            it.forEach {
-                Log.i("TAG", it.largeImageURL)
-            }
+        setupRecyclerView()
 
+        viewModel.listOfImages.observe(viewLifecycleOwner) {listOfImages ->
+           imageListRvAdapter.setNewList(listOfImages)
+        }
+
+    }
+
+    private fun setupRecyclerView() {
+        with(binding.rv) {
+            layoutManager = StaggeredGridLayoutManager(COLUMN_COUNT, GridLayoutManager.VERTICAL)
+            adapter = imageListRvAdapter
+            setClickListener()
+        }
+    }
+
+    private fun setClickListener() {
+        imageListRvAdapter.onItemClickListener = { imageItem ->
+            navigator().goToImageItemFragment(imageItem)
         }
     }
 
     companion object {
 
         private const val ARG_CATEGORY = "ARG_CATEGORY"
+        private const val COLUMN_COUNT = 2
 
         @JvmStatic
         fun newInstance(category: Category) =
