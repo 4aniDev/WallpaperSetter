@@ -8,3 +8,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/main/java/ru/chani/wallpapersetter/data/datasource/remote/api/Api.kt

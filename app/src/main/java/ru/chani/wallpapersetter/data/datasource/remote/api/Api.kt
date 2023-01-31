@@ -10,7 +10,7 @@ interface Api {
     @GET("api")
     suspend fun getListOfImagesByCategory(
         @Query("key") apiKey: String,
-        @Query("category") categoryName: String
+        @Query("category") categoryKeyWord: String
     ): Response<ListOfImages>
 
 }

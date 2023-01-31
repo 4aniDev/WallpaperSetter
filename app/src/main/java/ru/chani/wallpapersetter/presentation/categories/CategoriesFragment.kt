@@ -1,15 +1,15 @@
 package ru.chani.wallpapersetter.presentation.categories
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.chani.wallpapersetter.R
 import ru.chani.wallpapersetter.databinding.FragmentCategoriesBinding
 import ru.chani.wallpapersetter.presentation.AppViewModelFactory
+import ru.chani.wallpapersetter.presentation.navigator
 
 class CategoriesFragment : Fragment() {
 
@@ -45,12 +45,19 @@ class CategoriesFragment : Fragment() {
             categoriesRvAdapter = CategoriesRvAdapter()
             layoutManager = LinearLayoutManager(context)
             adapter = categoriesRvAdapter
+            setClickListener()
         }
     }
 
     private fun setObserver() {
         viewModel.listOfCategories.observe(viewLifecycleOwner) { listOfCategories ->
             categoriesRvAdapter.setListOfCategories(listOfCategories)
+        }
+    }
+
+    private fun setClickListener() {
+        categoriesRvAdapter.onItemClickListener = { category ->
+            navigator().goToListFragment(category)
         }
     }
 
