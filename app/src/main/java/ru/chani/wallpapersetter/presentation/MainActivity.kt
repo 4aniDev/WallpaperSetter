@@ -8,6 +8,7 @@ import ru.chani.wallpapersetter.R
 import ru.chani.wallpapersetter.domain.entity.Category
 import ru.chani.wallpapersetter.domain.entity.Image
 import ru.chani.wallpapersetter.presentation.categories.CategoriesFragment
+import ru.chani.wallpapersetter.presentation.imageItem.ImageIItemFragment
 import ru.chani.wallpapersetter.presentation.list.ListFragment
 
 class MainActivity : AppCompatActivity(), Navigator {
@@ -38,5 +39,7 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     override fun goToImageItemFragment(imageItem: Image) {
         Log.d("GO_TO_IMAGE_ITEM_DEBUG", imageItem.largeImageURL)
+        val imageIItemFragment = ImageIItemFragment.newInstance(image = imageItem)
+        launchFragment(imageIItemFragment)
     }
 }

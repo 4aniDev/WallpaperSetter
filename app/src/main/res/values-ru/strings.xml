@@ -8,4 +8,6 @@
     <string name="education">Образование</string>
     <string name="health">Здоровье</string>
     <string name="computer">Компьютер</string>
+    <string name="wallpaper_changed">Обои изменены</string>
+    <string name="network_error">Проверьте интернет</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.chani.wallpapersetter.domain.entity.Category
 import ru.chani.wallpapersetter.presentation.categories.CategoryViewModel
+import ru.chani.wallpapersetter.presentation.imageItem.ImageViewModel
 import ru.chani.wallpapersetter.presentation.list.ListViewModel
 
 class AppViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
@@ -21,6 +22,9 @@ class AppViewModelFactory(private val context: Context) : ViewModelProvider.Fact
         }
         if (modelClass.isAssignableFrom(ListViewModel::class.java)) {
             return ListViewModel(context = context, category = category!!) as T
+        }
+        if (modelClass.isAssignableFrom(ImageViewModel::class.java)) {
+            return ImageViewModel(context = context) as T
         } else {
             throw IllegalArgumentException("ViewModel class Not found")
         }
