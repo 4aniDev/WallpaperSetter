@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun goToImageItemFragment(imageItem: Image) {
-        Log.d("GO_TO_IMAGE_ITEM_DEBUG", imageItem.largeImageURL)
         val imageIItemFragment = ImageIItemFragment.newInstance(image = imageItem)
         launchFragment(imageIItemFragment)
     }

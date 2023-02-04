@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ru.chani.wallpapersetter.databinding.FragmentListBinding
 import ru.chani.wallpapersetter.domain.entity.Category
-import ru.chani.wallpapersetter.presentation.AppViewModelFactory
-import ru.chani.wallpapersetter.presentation.navigator
+import ru.chani.wallpapersetter.presentation.*
 
 
 class ListFragment : Fragment() {
@@ -49,11 +48,21 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setObservers()
+    }
 
+    private fun setObservers() {
         viewModel.listOfImages.observe(viewLifecycleOwner) {listOfImages ->
-           imageListRvAdapter.setNewList(listOfImages)
+            imageListRvAdapter.setNewList(listOfImages)
         }
 
+        viewModel.screenState.observe(viewLifecycleOwner) {screenSate ->
+            when (screenSate) {
+                ScreenStateError -> setScreenStateError()
+                ScreenStateLoading -> setScreenStateLoading()
+                ScreenStateSuccess -> setScreenStateSuccess()
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -68,6 +77,25 @@ class ListFragment : Fragment() {
         imageListRvAdapter.onItemClickListener = { imageItem ->
             navigator().goToImageItemFragment(imageItem)
         }
+    }
+
+
+    private fun setScreenStateLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.llError.visibility = View.GONE
+        binding.rv.visibility = View.GONE
+    }
+
+    private fun setScreenStateSuccess() {
+        binding.progressBar.visibility = View.GONE
+        binding.llError.visibility = View.GONE
+        binding.rv.visibility = View.VISIBLE
+    }
+
+    private fun setScreenStateError() {
+        binding.progressBar.visibility = View.GONE
+        binding.llError.visibility = View.VISIBLE
+        binding.rv.visibility = View.GONE
     }
 
     companion object {

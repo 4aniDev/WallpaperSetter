@@ -15,6 +15,14 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"/>
 
+    <ImageView
+        android:id="@+id/iv_error"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_margin="20dp"
+        android:src="@drawable/error"/>
 
     <ImageView
         android:id="@+id/image"
@@ -22,8 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scaleType="centerCrop"/>
-
-
 
 
 </androidx.cardview.widget.CardView>

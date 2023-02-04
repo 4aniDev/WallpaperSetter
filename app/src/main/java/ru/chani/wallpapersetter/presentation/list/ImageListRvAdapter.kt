@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import ru.chani.wallpapersetter.R
 import ru.chani.wallpapersetter.databinding.ImageItemBinding
 import ru.chani.wallpapersetter.domain.entity.Image
 
@@ -37,16 +35,14 @@ class ImageListRvAdapter : RecyclerView.Adapter<ImageListRvAdapter.CustomViewHol
         val currentImage = listOfImages[position]
         Picasso.get()
             .load(currentImage.largeImageURL)
-            .into(holder.binding.image, object :Callback {
-                override fun onSuccess() {
-                    holder.binding.progressBar.visibility = View.GONE
-                }
-
-                override fun onError(e: Exception?) {
-                    holder.binding.progressBar.visibility = View.GONE
-                    holder.binding.image.setBackgroundResource(R.drawable.error)
-                }
-            })
+            .into(
+                holder.binding.image,
+                ViewStateCallback(
+                    holder = holder,
+                    onSuccess = setViewStateSuccess,
+                    onError = setViewStateError
+                )
+            )
 
         holder.binding.root.setOnClickListener {
             onItemClickListener?.invoke(currentImage)
@@ -59,5 +55,16 @@ class ImageListRvAdapter : RecyclerView.Adapter<ImageListRvAdapter.CustomViewHol
 
         diffResult.dispatchUpdatesTo(this)
         listOfImages = newList
+    }
+
+    private val setViewStateSuccess: (holder: CustomViewHolder) -> Unit = {
+        it.binding.image.visibility = View.VISIBLE
+        it.binding.progressBar.visibility = View.GONE
+    }
+
+    private val setViewStateError: (holder: CustomViewHolder) -> Unit = {
+        it.binding.image.visibility = View.GONE
+        it.binding.ivError.visibility = View.VISIBLE
+        it.binding.progressBar.visibility = View.GONE
     }
 }
