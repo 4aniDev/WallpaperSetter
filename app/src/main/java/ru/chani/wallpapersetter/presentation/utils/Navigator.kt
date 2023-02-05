@@ -1,4 +1,4 @@
-package ru.chani.wallpapersetter.presentation
+package ru.chani.wallpapersetter.presentation.utils
 
 import androidx.fragment.app.Fragment
 import ru.chani.wallpapersetter.domain.entity.Category

@@ -1,12 +1,12 @@
-package ru.chani.wallpapersetter.presentation
+package ru.chani.wallpapersetter.presentation.utils
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.chani.wallpapersetter.domain.entity.Category
-import ru.chani.wallpapersetter.presentation.categories.CategoryViewModel
-import ru.chani.wallpapersetter.presentation.imageItem.ImageViewModel
-import ru.chani.wallpapersetter.presentation.list.ListViewModel
+import ru.chani.wallpapersetter.presentation.screens.categories.CategoryViewModel
+import ru.chani.wallpapersetter.presentation.screens.imageItem.ImageViewModel
+import ru.chani.wallpapersetter.presentation.screens.list.ListViewModel
 
 class AppViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 

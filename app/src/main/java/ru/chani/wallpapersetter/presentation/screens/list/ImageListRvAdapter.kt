@@ -1,4 +1,4 @@
-package ru.chani.wallpapersetter.presentation.list
+package ru.chani.wallpapersetter.presentation.screens.list
 
 import android.view.LayoutInflater
 import android.view.View
