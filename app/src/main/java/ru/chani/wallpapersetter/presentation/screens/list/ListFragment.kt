@@ -1,5 +1,6 @@
-package ru.chani.wallpapersetter.presentation.list
+package ru.chani.wallpapersetter.presentation.screens.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ru.chani.wallpapersetter.databinding.FragmentListBinding
 import ru.chani.wallpapersetter.domain.entity.Category
-import ru.chani.wallpapersetter.presentation.*
+import ru.chani.wallpapersetter.presentation.utils.*
 
 
 class ListFragment : Fragment() {
@@ -51,12 +52,19 @@ class ListFragment : Fragment() {
         setObservers()
     }
 
+    override fun onStart() {
+        super.onStart()
+        category?.name.let {
+            header().showText(it!!)
+        }
+    }
+
     private fun setObservers() {
-        viewModel.listOfImages.observe(viewLifecycleOwner) {listOfImages ->
+        viewModel.listOfImages.observe(viewLifecycleOwner) { listOfImages ->
             imageListRvAdapter.setNewList(listOfImages)
         }
 
-        viewModel.screenState.observe(viewLifecycleOwner) {screenSate ->
+        viewModel.screenState.observe(viewLifecycleOwner) { screenSate ->
             when (screenSate) {
                 ScreenStateError -> setScreenStateError()
                 ScreenStateLoading -> setScreenStateLoading()

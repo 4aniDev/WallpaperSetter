@@ -1,4 +1,4 @@
-package ru.chani.wallpapersetter.presentation.imageItem
+package ru.chani.wallpapersetter.presentation.screens.imageItem
 
 import android.app.WallpaperManager
 import android.content.Context
@@ -11,10 +11,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.chani.wallpapersetter.domain.entity.Image
-import ru.chani.wallpapersetter.presentation.ScreenState
-import ru.chani.wallpapersetter.presentation.ScreenStateError
-import ru.chani.wallpapersetter.presentation.ScreenStateLoading
-import ru.chani.wallpapersetter.presentation.ScreenStateSuccess
+import ru.chani.wallpapersetter.presentation.utils.ScreenState
+import ru.chani.wallpapersetter.presentation.utils.ScreenStateError
+import ru.chani.wallpapersetter.presentation.utils.ScreenStateLoading
+import ru.chani.wallpapersetter.presentation.utils.ScreenStateSuccess
 
 class ImageViewModel(private val context: Context) : ViewModel() {
 

@@ -1,5 +1,6 @@
-package ru.chani.wallpapersetter.presentation.categories
+package ru.chani.wallpapersetter.presentation.screens.categories
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.chani.wallpapersetter.R
 import ru.chani.wallpapersetter.databinding.FragmentCategoriesBinding
-import ru.chani.wallpapersetter.presentation.AppViewModelFactory
-import ru.chani.wallpapersetter.presentation.navigator
+import ru.chani.wallpapersetter.presentation.utils.AppViewModelFactory
+import ru.chani.wallpapersetter.presentation.utils.header
+import ru.chani.wallpapersetter.presentation.utils.navigator
 
 class CategoriesFragment : Fragment() {
 
@@ -25,10 +28,6 @@ class CategoriesFragment : Fragment() {
     }
     private lateinit var categoriesRvAdapter: CategoriesRvAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +37,11 @@ class CategoriesFragment : Fragment() {
         setObserver()
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        header().showText(getString(R.string.categories))
     }
 
     private fun setupRecyclerView() {

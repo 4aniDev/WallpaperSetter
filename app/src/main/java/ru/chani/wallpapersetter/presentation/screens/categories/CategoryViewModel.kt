@@ -1,4 +1,4 @@
-package ru.chani.wallpapersetter.presentation.categories
+package ru.chani.wallpapersetter.presentation.screens.categories
 
 import android.content.Context
 import androidx.lifecycle.LiveData

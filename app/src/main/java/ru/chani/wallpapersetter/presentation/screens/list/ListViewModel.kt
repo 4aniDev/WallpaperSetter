@@ -1,4 +1,4 @@
-package ru.chani.wallpapersetter.presentation.list
+package ru.chani.wallpapersetter.presentation.screens.list
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -13,10 +13,10 @@ import ru.chani.wallpapersetter.domain.entity.Category
 import ru.chani.wallpapersetter.domain.entity.Image
 import ru.chani.wallpapersetter.domain.entity.wrapper.ErrorEntity
 import ru.chani.wallpapersetter.domain.usecase.GetListOfImagesByCategoryUseCase
-import ru.chani.wallpapersetter.presentation.ScreenState
-import ru.chani.wallpapersetter.presentation.ScreenStateError
-import ru.chani.wallpapersetter.presentation.ScreenStateLoading
-import ru.chani.wallpapersetter.presentation.ScreenStateSuccess
+import ru.chani.wallpapersetter.presentation.utils.ScreenState
+import ru.chani.wallpapersetter.presentation.utils.ScreenStateError
+import ru.chani.wallpapersetter.presentation.utils.ScreenStateLoading
+import ru.chani.wallpapersetter.presentation.utils.ScreenStateSuccess
 
 class ListViewModel(context: Context, category: Category) : ViewModel() {
 

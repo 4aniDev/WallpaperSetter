@@ -3,22 +3,23 @@ package ru.chani.wallpapersetter.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import ru.chani.wallpapersetter.R
 import ru.chani.wallpapersetter.domain.entity.Category
 import ru.chani.wallpapersetter.domain.entity.Image
-import ru.chani.wallpapersetter.presentation.categories.CategoriesFragment
-import ru.chani.wallpapersetter.presentation.imageItem.ImageIItemFragment
-import ru.chani.wallpapersetter.presentation.list.ListFragment
+import ru.chani.wallpapersetter.presentation.screens.SplashFragment
+import ru.chani.wallpapersetter.presentation.screens.categories.CategoriesFragment
+import ru.chani.wallpapersetter.presentation.screens.imageItem.ImageIItemFragment
+import ru.chani.wallpapersetter.presentation.screens.list.ListFragment
+import ru.chani.wallpapersetter.presentation.utils.Header
+import ru.chani.wallpapersetter.presentation.utils.Navigator
 
-class MainActivity : AppCompatActivity(), Navigator {
+class MainActivity : AppCompatActivity(), Navigator, Header {
 
     private val activityScope = CoroutineScope(Dispatchers.Main)
-      override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        hideHeader()
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState != null) {
@@ -45,6 +46,11 @@ class MainActivity : AppCompatActivity(), Navigator {
         supportFragmentManager.putFragment(outState, KEY_CURRENT_FRAGMENT, currentFragment)
     }
 
+    override fun onDestroy() {
+        activityScope.cancel()
+        super.onDestroy()
+    }
+
     private fun launchSplashFragment() {
         supportFragmentManager
             .beginTransaction()
@@ -58,6 +64,7 @@ class MainActivity : AppCompatActivity(), Navigator {
             .replace(R.id.container, CategoriesFragment.newInstance())
             .commit()
     }
+
     private fun launchFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()
@@ -78,6 +85,15 @@ class MainActivity : AppCompatActivity(), Navigator {
     override fun goToImageItemFragment(imageItem: Image) {
         val imageIItemFragment = ImageIItemFragment.newInstance(image = imageItem)
         launchFragment(imageIItemFragment)
+    }
+
+    override fun hideHeader() {
+        supportActionBar?.hide()
+    }
+
+    override fun showText(string: String) {
+        supportActionBar?.show()
+        this.title = string
     }
 
     companion object {

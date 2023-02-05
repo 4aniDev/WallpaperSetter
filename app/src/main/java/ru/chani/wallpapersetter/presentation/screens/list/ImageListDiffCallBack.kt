@@ -1,4 +1,4 @@
-package ru.chani.wallpapersetter.presentation.list
+package ru.chani.wallpapersetter.presentation.screens.list
 
 import androidx.recyclerview.widget.DiffUtil
 import ru.chani.wallpapersetter.domain.entity.Image

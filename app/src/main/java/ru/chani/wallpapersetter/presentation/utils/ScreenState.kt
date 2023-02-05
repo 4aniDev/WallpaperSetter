@@ -1,4 +1,4 @@
-package ru.chani.wallpapersetter.presentation
+package ru.chani.wallpapersetter.presentation.utils
 
 sealed class ScreenState
 

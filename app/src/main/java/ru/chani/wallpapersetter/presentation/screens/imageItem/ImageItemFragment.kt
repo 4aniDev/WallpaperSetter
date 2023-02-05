@@ -1,5 +1,6 @@
-package ru.chani.wallpapersetter.presentation.imageItem
+package ru.chani.wallpapersetter.presentation.screens.imageItem
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,7 @@ import com.squareup.picasso.Picasso
 import ru.chani.wallpapersetter.R
 import ru.chani.wallpapersetter.databinding.FragmentImageItemBinding
 import ru.chani.wallpapersetter.domain.entity.Image
-import ru.chani.wallpapersetter.presentation.AppViewModelFactory
-import ru.chani.wallpapersetter.presentation.ScreenStateError
-import ru.chani.wallpapersetter.presentation.ScreenStateLoading
-import ru.chani.wallpapersetter.presentation.ScreenStateSuccess
+import ru.chani.wallpapersetter.presentation.utils.*
 
 class ImageIItemFragment : Fragment() {
 
@@ -32,7 +30,10 @@ class ImageIItemFragment : Fragment() {
         )[ImageViewModel::class.java]
     }
 
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        header().hideHeader()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
