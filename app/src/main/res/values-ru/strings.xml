@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wallpaper Setter</string>
+    <string name="backgrounds">Задний фон</string>
+    <string name="fashion">Мода</string>
+    <string name="nature">Природа</string>
+    <string name="science">Наука</string>
+    <string name="education">Образование</string>
+    <string name="health">Здоровье</string>
+    <string name="computer">Компьютер</string>
+    <string name="wallpaper_changed">Обои изменены</string>
+    <string name="network_error">Проверьте интернет</string>
+    <string name="categories">Категории</string>
+</resources>
